@@ -1,0 +1,27 @@
+spring:
+  rabbitmq:
+    addresses: localhost:5672
+    username: guest
+    password: guest
+    virtual-host: /
+    publisher-confirms: true
+    publisher-returns: true
+    template:
+      mandatory: true
+  datasource:
+    url: jdbc:mysql://localhost:3306/test?serverTimezone=UTC
+    username: root
+    password: 1qaz@WSX
+    driverClassName: com.mysql.jdbc.Driver
+    type: com.alibaba.druid.pool.DruidDataSource
+server:
+  port: 8001
+  servlet:
+    context-path: /
+mybatis:
+  type-aliases-package: com.sxw.entity
+  mapper-locations: classpath:com/sxw/springbootproducer/mapping/*.xml
+logging:
+  level:
+    tk:
+      mybatis: trace
