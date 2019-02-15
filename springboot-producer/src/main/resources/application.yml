@@ -15,12 +15,12 @@ spring:
     driverClassName: com.mysql.jdbc.Driver
     type: com.alibaba.druid.pool.DruidDataSource
 server:
-  port: 8001
+  port: 8080
   servlet:
     context-path: /
 mybatis:
-  type-aliases-package: com.sxw.entity
-  mapper-locations: classpath:com/sxw/springbootproducer/mapping/*.xml
+  type-aliases-package: com.entity
+  mapper-locations: classpath:mapper/*.xml
 logging:
   level:
     tk:

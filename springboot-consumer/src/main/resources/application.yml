@@ -13,14 +13,14 @@ spring:
         #manual:手动签收 ack(不然当消费者接收消息后将自动提交ack确认，MQ将删除此条消息）
         acknowledge-mode: manual
         max-concurrency: 10
-        #同一时间一条消息（限流）
-        prefetch: 1
+        #同一时间deliveryTag最大值（限流）
+        prefetch: 10
   datasource:
-      url: jdbc:mysql://localhost:3306/test?serverTimezone=UTC
+      url: jdbc:mysql://localhost:3306/test?serverTimezone=UTC&characterEncoding=UTF-8
       username: root
       password: 1qaz@WSX
       driverClassName: com.mysql.jdbc.Driver
 server:
-  port: 8002
+  port: 8081
   servlet:
     context-path: /
