@@ -10,9 +10,9 @@ import org.springframework.amqp.rabbit.annotation.RabbitHandler;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.amqp.support.AmqpHeaders;
 import org.springframework.messaging.handler.annotation.Headers;
+import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.stereotype.Component;
 
-import com.alibaba.fastjson.JSON;
 import com.ghaoxiang.entity.Order;
 import com.rabbitmq.client.Channel;
 
@@ -35,10 +35,10 @@ public class OrderReceiver {
             key = "order.*"
     ))
     @RabbitHandler
-    public void onOrderMessage(/*@Payload Order order*/String message, @Headers Map<String,Object> headers, Channel channel) throws IOException {
+    public void onOrderMessage(@Payload Order order, @Headers Map<String,Object> headers, Channel channel) throws IOException {
         // 消费者操作
         System.out.println("---------收到消息，开始消费---------");
-        System.out.println("订单ID：" + JSON.parseObject(message, Order.class).getId());
+        System.out.println("订单信息：" + order.getMessageId());
 
         /**
          * Delivery Tag 用来标识信道中投递的消息。RabbitMQ 推送消息给 Consumer 时，会附带一个 Delivery Tag，

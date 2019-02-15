@@ -19,9 +19,9 @@ public class SpringbootProducerApplicationTests {
 
     @Test
     public void testSend() throws Exception {
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 40; i++) {
             Order order = new Order();
-            order.setId(i);
+            order.setId(i+1955);
             order.setName("测试订单");
             order.setMessageId(System.currentTimeMillis() + "$" + UUID.randomUUID().toString());
             orderService.createOrder(order);

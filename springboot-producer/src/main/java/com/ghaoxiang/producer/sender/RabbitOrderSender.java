@@ -10,7 +10,6 @@ import org.springframework.stereotype.Component;
 import com.ghaoxiang.entity.Order;
 import com.ghaoxiang.producer.constant.Constants;
 import com.ghaoxiang.producer.dao.BrokerMessageLogMapper;
-import com.ghaoxiang.producer.utils.FastJsonConvertUtil;
 
 @Component
 public class RabbitOrderSender implements RabbitTemplate.ConfirmCallback{
@@ -47,6 +46,6 @@ public class RabbitOrderSender implements RabbitTemplate.ConfirmCallback{
         rabbitTemplate.setConfirmCallback(this);
         // 消息唯一ID(一般设置为业务唯一主键)
         CorrelationData correlationData = new CorrelationData(order.getMessageId());
-        rabbitTemplate.convertAndSend("order-exchange", "order.ABC", FastJsonConvertUtil.convertObjectToJSON(order), correlationData);
+        rabbitTemplate.convertAndSend("order-exchange", "order.ABC", order, correlationData);
     }
 }
