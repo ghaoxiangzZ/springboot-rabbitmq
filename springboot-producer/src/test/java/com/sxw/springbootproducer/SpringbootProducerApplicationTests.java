@@ -13,14 +13,15 @@ import java.util.UUID;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class SpringbootProducerApplicationTests {
+
     @Autowired private OrderService orderService;
+
     @Test
     public void testSend() throws Exception {
         Order order = new Order();
-        order.setId(2018092102);
-        order.setName("测试订单zz");
-        order.setMessageId(System.currentTimeMillis()+"$"+UUID.randomUUID().toString());
+        order.setId(3);
+        order.setName("测试订单");
+        order.setMessageId(System.currentTimeMillis() + "$" + UUID.randomUUID().toString());
         orderService.createOrder(order);
     }
-
 }

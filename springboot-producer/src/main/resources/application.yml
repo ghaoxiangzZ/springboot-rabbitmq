@@ -4,12 +4,12 @@ spring:
     username: guest
     password: guest
     virtual-host: /
-    publisher-confirms: true
+    publisher-confirms: true #异步监听rabbitmq broker结果
     publisher-returns: true
     template:
       mandatory: true
   datasource:
-    url: jdbc:mysql://localhost:3306/test?serverTimezone=UTC
+    url: jdbc:mysql://localhost:3306/test?serverTimezone=UTC&characterEncoding=UTF-8
     username: root
     password: 1qaz@WSX
     driverClassName: com.mysql.jdbc.Driver

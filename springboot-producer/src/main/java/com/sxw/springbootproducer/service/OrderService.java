@@ -26,6 +26,9 @@ public class OrderService {
     private RabbitOrderSender rabbitOrderSender;
 
     public void createOrder(Order order) throws Exception {
+        /**
+         * step1 业务数据入库
+         */
         // 使用当前时间当做订单创建时间（为了模拟一下简化）
         Date orderTime = new Date();
         // 插入业务数据
@@ -43,6 +46,9 @@ public class OrderService {
         brokerMessageLog.setCreateTime(new Date());
         brokerMessageLog.setUpdateTime(new Date());
         brokerMessageLogMapper.insertSelective(brokerMessageLog);
+        /**
+         * step2 业务数据发送rabbitmq
+         */
         // 发送消息
         rabbitOrderSender.sendOrder(order);
     }

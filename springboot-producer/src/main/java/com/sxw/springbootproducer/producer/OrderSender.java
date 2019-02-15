@@ -10,6 +10,9 @@ import org.springframework.stereotype.Component;
 public class OrderSender {
     @Autowired private RabbitTemplate rabbitTemplate;
 
+    /**
+     * 简易调用rabbitmq（仅发消息到broker）
+     */
     public void send(Order order){
         CorrelationData correlationData = new CorrelationData();
         correlationData.setId(order.getMessageId());

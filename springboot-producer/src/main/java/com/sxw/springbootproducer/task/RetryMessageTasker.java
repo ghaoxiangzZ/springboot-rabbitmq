@@ -25,12 +25,12 @@ public class RetryMessageTasker {
 
     @Scheduled(initialDelay = 5000, fixedDelay = 10000)
     public void reSend(){
-        System.out.println("-----------定时任务开始-----------");
-        //pull status = 0 and timeout message
+        // pull status = 0 and timeout message
         List<BrokerMessageLog> list = brokerMessageLogMapper.query4StatusAndTimeoutMessage();
         list.forEach(messageLog -> {
+            System.out.println("-----------定时任务开始-----------");
             if(messageLog.getTryCount() >= 3){
-                //update fail message
+                // update fail message
                 brokerMessageLogMapper.changeBrokerMessageLogStatus(messageLog.getMessageId(), Constants.ORDER_SEND_FAILURE, new Date());
             } else {
                 // resend
@@ -38,6 +38,7 @@ public class RetryMessageTasker {
                 Order reSendOrder = FastJsonConvertUtil.convertJSONToObject(messageLog.getMessage(), Order.class);
                 try {
                     rabbitOrderSender.sendOrder(reSendOrder);
+                    System.out.println("-----------重新发送mq-----------");
                 } catch (Exception e) {
                     e.printStackTrace();
                     System.err.println("-----------异常处理-----------");

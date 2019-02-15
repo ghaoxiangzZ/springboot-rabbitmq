@@ -1,17 +1,19 @@
-## springboot整合rabbitmq的基本配置
+#springboot整合rabbitmq的基本配置
 spring:
   rabbitmq:
     addresses: localhost:5672
     username: guest
     password: guest
     virtual-host: /
-## 消费端配置
+    #rabbitmq消费端配置
     listener:
       simple:
+        #最大并发数
         concurrency: 5
-        ## manual:手动 ack（确认）
+        #manual:手动签收 ack(不然当消费者接收消息后将自动提交ack确认，MQ将删除此条消息）
         acknowledge-mode: manual
         max-concurrency: 10
+        #同一时间一条消息（限流）
         prefetch: 1
   datasource:
       url: jdbc:mysql://localhost:3306/test?serverTimezone=UTC

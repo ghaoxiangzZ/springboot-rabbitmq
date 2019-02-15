@@ -20,6 +20,7 @@ public interface BrokerMessageLogMapper {
      * @param updateTime
      */
     void update4ReSend(@Param("messageId")String messageId, @Param("updateTime")Date updateTime);
+
     /**
      * 更新最终消息发送结果 成功 or 失败
      * @param messageId
